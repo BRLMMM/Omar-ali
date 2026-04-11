@@ -22,8 +22,8 @@ export default function Home() {
       {/* Noise overlay for texture */}
       <div className="fixed inset-0 pointer-events-none z-50 noise-overlay" />
 
-      {/* Main Content wrapper with z-10 and dark background, scrolling over the sticky footer */}
-      <div className="relative z-10 bg-[#050505] w-full pb-2 md:pb-0">
+      {/* Main Content Sections - Groups in z-10 to allow fixed footer reveal beneath */}
+      <div className="relative z-10 bg-[#050505] w-full shadow-[0_50px_100px_rgba(0,0,0,1)]">
         <HeroSection />
         <WhyChooseUsSection />
         <TechStackSection />
@@ -31,8 +31,12 @@ export default function Home() {
         <ProjectsSection />
       </div>
 
-      {/* Revealed Footer Sticky Container */}
-      <div className="sticky bottom-0 left-0 w-full h-[100dvh] z-0">
+      {/* 
+          Revealed Footer Container:
+          This container determines the total scrollable area for the reveal.
+          The Internal logic in ContactFooter will handle its own stickiness and parallax.
+      */}
+      <div className="relative z-0 w-full">
         <ContactFooter />
       </div>
     </main>

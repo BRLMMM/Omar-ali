@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
@@ -49,6 +49,11 @@ const timelineData = [
 
 export default function WhyChooseUsSection() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -309,7 +314,7 @@ export default function WhyChooseUsSection() {
             {/* Data Warp Accelerator Animation */}
             <div className="relative w-full md:w-1/3 h-48 md:h-full bg-zinc-800/40 rounded-3xl overflow-hidden border border-white/5 flex items-center justify-center">
                 <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                   {[...Array(25)].map((_, i) => (
+                   {isMounted && [...Array(25)].map((_, i) => (
                      <motion.div 
                        key={i} 
                        className="absolute h-[1px] bg-gradient-to-r from-transparent via-[#CCFF00] to-transparent"
@@ -329,7 +334,7 @@ export default function WhyChooseUsSection() {
                      />
                    ))}
                    {/* Faster, brighter white streaks for contrast */}
-                   {[...Array(10)].map((_, i) => (
+                   {isMounted && [...Array(10)].map((_, i) => (
                      <motion.div 
                        key={`fast-${i}`} 
                        className="absolute h-[1.5px] bg-white"

@@ -1,12 +1,16 @@
+import dynamic from 'next/dynamic';
 import HeroSection from '@/components/HeroSection';
-import WhyChooseUsSection from '@/components/WhyChooseUsSection';
-import TechStackSection from '@/components/TechStackSection';
-import SeyaqServicesMerged from '@/components/SeyaqServicesMerged';
-import ProjectsSection from '@/components/ProjectsSection';
-import ContactFooter from '@/components/ContactFooter';
 
-import CustomCursor from '@/components/CustomCursor';
-import FloatingWhatsApp from '@/components/FloatingWhatsApp';
+// Dynamically import all below-the-fold and non-critical components to reduce initial JS payload
+const WhyChooseUsSection = dynamic(() => import('@/components/WhyChooseUsSection'), { ssr: true });
+const TechStackSection = dynamic(() => import('@/components/TechStackSection'), { ssr: true });
+const SeyaqServicesMerged = dynamic(() => import('@/components/SeyaqServicesMerged'), { ssr: true });
+const ProjectsSection = dynamic(() => import('@/components/ProjectsSection'), { ssr: true });
+const ContactFooter = dynamic(() => import('@/components/ContactFooter'), { ssr: true });
+
+// UI Extras
+const CustomCursor = dynamic(() => import('@/components/CustomCursor'));
+const FloatingWhatsApp = dynamic(() => import('@/components/FloatingWhatsApp'));
 
 export default function Home() {
   return (

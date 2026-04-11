@@ -72,7 +72,7 @@ export default function CustomCursor() {
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{__html: `* { cursor: none !important; }`}} />
+      <style dangerouslySetInnerHTML={{__html: `body, a, button { cursor: none !important; }`}} />
       
       {/* Outer Ring */}
       <motion.div

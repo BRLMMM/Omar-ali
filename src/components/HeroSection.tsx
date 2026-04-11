@@ -69,18 +69,15 @@ export default function HeroSection() {
           className="flex whitespace-nowrap mb-[-12vw] sm:mb-[-8vw] md:mb-[-4vw] will-change-transform"
         >
           {firstName.split('').map((letter, i) => (
-            <motion.span
+            <span
               key={`first-${i}`}
-              variants={letterVariants}
-              initial="initial"
-              whileHover="hover"
-              className="text-[45vw] md:text-[25vw] font-black leading-none text-[#F5F5F0] cursor-crosshair inline-block uppercase drop-shadow-xl md:drop-shadow-2xl will-change-transform"
+              className="text-[45vw] md:text-[25vw] font-black leading-none text-[#F5F5F0] cursor-crosshair inline-block uppercase drop-shadow-xl md:drop-shadow-2xl will-change-transform hover:-translate-y-2 hover:rotate-1 hover:scale-105 transition-all duration-300 ease-out"
               style={{
                 fontFamily: "'Impact', 'Arial Black', sans-serif",
               }}
             >
               {letter}
-            </motion.span>
+            </span>
           ))}
         </motion.div>
         
@@ -90,18 +87,15 @@ export default function HeroSection() {
           className="flex whitespace-nowrap will-change-transform"
         >
           {lastName.split('').map((letter, i) => (
-            <motion.span
+            <span
               key={`last-${i}`}
-              variants={letterVariants}
-              initial="initial"
-              whileHover="hover"
-              className="text-[45vw] md:text-[25vw] font-black leading-none text-[#CCFF00] cursor-crosshair inline-block uppercase drop-shadow-lg md:drop-shadow-[5px_5px_0px_#000] translate-z-0 will-change-transform"
+              className="text-[45vw] md:text-[25vw] font-black leading-none text-[#CCFF00] cursor-crosshair inline-block uppercase drop-shadow-lg md:drop-shadow-[5px_5px_0px_#000] translate-z-0 will-change-transform hover:-translate-y-2 hover:-rotate-1 hover:scale-105 transition-all duration-300 ease-out"
               style={{
                 fontFamily: "'Impact', 'Arial Black', sans-serif",
               }}
             >
               {letter}
-            </motion.span>
+            </span>
           ))}
         </motion.div>
         

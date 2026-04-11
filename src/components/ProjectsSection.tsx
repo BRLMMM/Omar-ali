@@ -80,7 +80,7 @@ export default function ProjectsSection() {
                 className="group relative h-[100dvh] w-screen flex-shrink-0 flex items-center justify-center overflow-hidden"
               >
                 {/* Background Image acts as a clickable link spanning the whole screen under the text */}
-                <a href={project.link} className="absolute inset-0 z-0 block overflow-hidden">
+                <a href={project.link} className="absolute inset-0 z-0 block overflow-hidden min-h-[100dvh]">
                   <motion.div 
                     className="relative w-full h-full opacity-30 mix-blend-luminosity grayscale group-hover:opacity-40 transition-all duration-[1500ms] pointer-events-none"
                     whileHover={{ scale: 1.1 }}
@@ -89,7 +89,8 @@ export default function ProjectsSection() {
                       src={project.bgImage}
                       alt={project.title}
                       fill
-                      loading="lazy"
+                      priority={index === 0}
+                      loading={index === 0 ? undefined : "lazy"}
                       className="object-cover"
                       sizes="100vw"
                     />

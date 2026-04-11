@@ -3,9 +3,21 @@
 import { motion } from 'framer-motion';
 import { FaWhatsapp } from 'react-icons/fa';
 
+// Validate WhatsApp number: must contain only digits and optional leading +
+function sanitizePhoneNumber(number: string): string {
+  const cleaned = number.replace(/[^\d+]/g, '');
+  // If invalid, return default safe value
+  if (!/^\+?\d{10,15}$/.test(cleaned)) {
+    console.warn('Invalid WhatsApp number format, using default');
+    return '20100000000';
+  }
+  return cleaned;
+}
+
 export default function FloatingWhatsApp() {
-  // Read WhatsApp number from Environment Variables
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "20100000000"; 
+  // Read WhatsApp number from Environment Variables and sanitize it
+  const rawWhatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "20100000000";
+  const whatsappNumber = sanitizePhoneNumber(rawWhatsappNumber);
   const message = encodeURIComponent("Hello Omar, I'd like to discuss a project with you.");
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
 

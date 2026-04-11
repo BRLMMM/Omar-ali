@@ -1,34 +1,47 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 export default function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Disable expensive scroll animations on mobile for better performance
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end start"]
+    offset: ["start start", "end start"],
+    layoutEffect: false
   });
 
-  // Scroll animations: Use % instead of vw to scale perfectly with the contained text size
-  const xTop = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const xBottom = useTransform(scrollYProgress, [0, 1], ["0%", "-50%"]);
+  // Only apply transforms on desktop
+  const xTop = useTransform(scrollYProgress, [0, 1], isMobile ? ["0%", "0%"] : ["0%", "50%"]);
+  const xBottom = useTransform(scrollYProgress, [0, 1], isMobile ? ["0%", "0%"] : ["0%", "-50%"]);
 
   const firstName = "OMAR";
   const lastName = "ALI";
 
-  // Hover animation for individual letters (subtle, edgy, continuous jitter)
+  // Simplified hover animation for mobile, full animation for desktop
   const letterVariants = {
     initial: { y: 0, rotate: 0, scale: 1 },
-    hover: { 
-      y: [0, -2, 1, -1, 0], 
-      rotate: [0, -1, 1, 0, 0],
-      scale: [1, 1.02, 1],
-      transition: { 
-        duration: 0.8, 
-        repeat: Infinity, 
-        ease: "easeInOut" 
-      } 
+    hover: {
+      y: isMobile ? [0] : [0, -2, 1, -1, 0],
+      rotate: isMobile ? [0] : [0, -1, 1, 0, 0],
+      scale: isMobile ? [1] : [1, 1.02, 1],
+      transition: {
+        duration: isMobile ? 0 : 0.8,
+        repeat: isMobile ? 0 : Infinity,
+        ease: "easeInOut"
+      }
     }
   };
 
@@ -60,45 +73,51 @@ export default function HeroSection() {
         </span>
       </div>
 
-      {/* Main Massive Typography - Optimized Blend Mode for Mobile */}
+      {/* Main Massive Typography - Simplified for Mobile */}
       <div className="relative z-10 w-full flex flex-col items-center justify-center translate-y-[-5%] md:mix-blend-difference">
-        
-        {/* Top Text (First Name) */}
-        <motion.div 
+
+        {/* Top Text (First Name) - CSS-only hover on mobile */}
+        <motion.div
           style={{ x: xTop }}
-          className="flex whitespace-nowrap mb-[-12vw] sm:mb-[-8vw] md:mb-[-4vw] will-change-transform"
+          className="flex whitespace-nowrap mb-[-12vw] sm:mb-[-8vw] md:mb-[-4vw]"
         >
           {firstName.split('').map((letter, i) => (
-            <span
+            <motion.span
               key={`first-${i}`}
-              className="text-[45vw] md:text-[25vw] font-black leading-none text-[#F5F5F0] cursor-crosshair inline-block uppercase drop-shadow-xl md:drop-shadow-2xl will-change-transform hover:-translate-y-2 hover:rotate-1 hover:scale-105 transition-all duration-300 ease-out"
+              variants={letterVariants}
+              initial="initial"
+              whileHover="hover"
+              className="text-[45vw] md:text-[25vw] font-black leading-none text-[#F5F5F0] cursor-crosshair inline-block uppercase drop-shadow-xl md:drop-shadow-2xl"
               style={{
                 fontFamily: "'Impact', 'Arial Black', sans-serif",
               }}
             >
               {letter}
-            </span>
+            </motion.span>
           ))}
         </motion.div>
-        
-        {/* Bottom Text (Last Name) */}
-        <motion.div 
+
+        {/* Bottom Text (Last Name) - CSS-only hover on mobile */}
+        <motion.div
           style={{ x: xBottom }}
-          className="flex whitespace-nowrap will-change-transform"
+          className="flex whitespace-nowrap"
         >
           {lastName.split('').map((letter, i) => (
-            <span
+            <motion.span
               key={`last-${i}`}
-              className="text-[45vw] md:text-[25vw] font-black leading-none text-[#CCFF00] cursor-crosshair inline-block uppercase drop-shadow-lg md:drop-shadow-[5px_5px_0px_#000] translate-z-0 will-change-transform hover:-translate-y-2 hover:-rotate-1 hover:scale-105 transition-all duration-300 ease-out"
+              variants={letterVariants}
+              initial="initial"
+              whileHover="hover"
+              className="text-[45vw] md:text-[25vw] font-black leading-none text-[#CCFF00] cursor-crosshair inline-block uppercase drop-shadow-lg md:drop-shadow-[5px_5px_0px_#000]"
               style={{
                 fontFamily: "'Impact', 'Arial Black', sans-serif",
               }}
             >
               {letter}
-            </span>
+            </motion.span>
           ))}
         </motion.div>
-        
+
       </div>
     </section>
   );

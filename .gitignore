@@ -44,3 +44,13 @@ coverage/
 
 # Vercel (if you use it)
 .vercel
+
+# Build logs
+*.log
+build_output.log
+
+# TS build info
+*.tsbuildinfo
+
+# Next.js types (optional but cleaner)
+next-env.d.ts

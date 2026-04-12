@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Space_Grotesk } from 'next/font/google';
-import Script from 'next/script';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import './globals.css';
 import SmoothScroll from '@/components/SmoothScroll';
 
@@ -40,21 +40,7 @@ export default function RootLayout({
     <html lang="en" className={`${spaceGrotesk.variable}`} suppressHydrationWarning>
       <body className={`${spaceGrotesk.className} bg-[#050505] text-white antialiased`} suppressHydrationWarning>
         <SmoothScroll>{children}</SmoothScroll>
-        
-        {/* Google Analytics */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-N1NK0CWKFD"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-            gtag('config', 'G-N1NK0CWKFD');
-          `}
-        </Script>
+        <GoogleAnalytics gaId="G-N1NK0CWKFD" />
       </body>
     </html>
   );

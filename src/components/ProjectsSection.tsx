@@ -60,29 +60,15 @@ export default function ProjectsSection() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Disable expensive scroll animations on mobile - use simple vertical scroll
+  // Original horizontal scroll animation for everyone
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
   });
 
-  // Only apply horizontal transform on desktop
-  const x = useTransform(scrollYProgress, [0, 1], isMobile ? ["0%", "0%"] : ["0%", "-75%"]);
+  // Apply horizontal transform based on total projects (-75% for 4 projects of 100vw each)
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-75%"]);
 
-  // Mobile: Simple vertical stack with fade-in animation
-  if (isMobile) {
-    return (
-      <section ref={containerRef} id="projects" className="relative w-full bg-[#050505] mt-16 md:mt-32">
-        <div className="flex flex-col">
-          {projects.map((project, index) => (
-            <ProjectCardMobile key={project.id} project={project} index={index} />
-          ))}
-        </div>
-      </section>
-    );
-  }
-
-  // Desktop: Original horizontal scroll animation
   return (
     <section ref={containerRef} id="projects" className="relative h-[400dvh] w-full bg-[#050505] mt-16 md:mt-32">
 

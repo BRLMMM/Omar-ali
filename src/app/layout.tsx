@@ -10,15 +10,23 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
-  title: 'Omar Ali | Full-Stack Developer & AI Specialist',
-  description: 'Computer Science student specializing in AI at Zewail City. Founder of SEYAQ. Building intelligent digital experiences.',
-  keywords: ['Full-Stack Developer', 'AI', 'Web Development', 'Next.js', 'React', 'TypeScript', 'Portfolio'],
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://omali.ae'), // Set your production domain here
+  title: 'Omar Ali | Digital Partner & Full-Stack Architect',
+  description: 'Digital Partner & Full-Stack Engineer. I architect custom systems, scalable e-commerce, and high-performance websites that drive real business growth.',
+  keywords: ['Full-Stack Developer', 'Systems Architect', 'Digital Partner', 'E-commerce Developer', 'Next.js', 'Custom ERP', 'Seyaq Agency', 'UI/UX Design', 'Web Development'],
   authors: [{ name: 'Omar Ali' }],
   openGraph: {
-    title: 'Omar Ali | Full-Stack Developer & AI Specialist',
-    description: 'Computer Science student specializing in AI at Zewail City. Founder of SEYAQ.',
+    title: 'Omar Ali | Digital Partner & Full-Stack Architect',
+    description: 'Digital Partner & Full-Stack Engineer. I architect custom systems, scalable e-commerce, and high-performance websites that drive real business growth.',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Omar Ali | Digital Partner & Full-Stack Architect',
+    description: 'Digital Partner & Full-Stack Engineer. I architect custom systems, scalable e-commerce, and high-performance websites that drive real business growth.',
+  },
+  icons: {
+    icon: '/icon.svg',
   },
 };
 

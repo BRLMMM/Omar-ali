@@ -1,18 +1,9 @@
-'use client';
-
-import { use } from 'react';
-import { motion } from 'framer-motion';
+import { Metadata } from 'next';
 import { ProjectData } from '@/types/project';
-import BlockRenderer from '@/components/project-blocks/BlockRenderer';
-import Image from 'next/image';
-import ContactFooter from '@/components/ContactFooter';
+import ProjectDetailClient from './ProjectDetailClient';
 import Link from 'next/link';
 
-import CustomCursor from '@/components/CustomCursor';
-import FloatingWhatsApp from '@/components/FloatingWhatsApp';
-
-// MOCK LOCAL DATABASE FOR TESTING THE BLOCK RENDERER
-// In the future CMS, this will be fetched via Prisma/Database based on the `[slug]` from params.
+// MOCK LOCAL DATABASE (Moved to Server side for Metadata generation)
 const MOCK_DB: Record<string, ProjectData> = {
   'khatwa': {
     id: 'proj-2',
@@ -111,18 +102,52 @@ const MOCK_DB: Record<string, ProjectData> = {
   }
 };
 
-export default function ProjectDetailsPage({ params }: { params: Promise<{ slug: string }> }) {
-  // Use React.use to resolve params in a Client Component (Next.js 15+)
-  const resolvedParams = use(params);
-  
-  // Simulate DB fetch based on the URL params
+// Generate Dynamic Metadata for the project page
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const resolvedParams = await params;
+  const project = MOCK_DB[resolvedParams.slug.toLowerCase()];
+
+  if (!project) {
+    return {
+      title: 'Project Not Found | Omar Ali',
+      description: 'The requested project could not be found in the archive.',
+    };
+  }
+
+  return {
+    title: `${project.title} | Case Study - Omar Ali`,
+    description: project.summary,
+    openGraph: {
+      title: `${project.title} | Case Study - Omar Ali`,
+      description: project.summary,
+      url: `https://omali.ae/projects/${project.slug}`,
+      siteName: 'Omar Ali Portfolio',
+      images: [
+        {
+          url: project.heroImage,
+          width: 1200,
+          height: 630,
+          alt: project.title,
+        },
+      ],
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${project.title} | Case Study - Omar Ali`,
+      description: project.summary,
+      images: [project.heroImage],
+    },
+  };
+}
+
+export default async function ProjectDetailsPage({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params;
   const project = MOCK_DB[resolvedParams.slug.toLowerCase()];
 
   if (!project) {
     return (
-      <div className="min-h-screen bg-[#050505] flex flex-col items-center justify-center text-white relative overflow-hidden font-mono">
-        <div className="fixed inset-0 pointer-events-none z-50 noise-overlay" />
-        
+      <div className="min-h-screen bg-[#050505] flex flex-col items-center justify-center text-white relative overflow-hidden font-mono text-center">
         {/* Massive Background Text */}
         <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] select-none pointer-events-none">
           <h1 className="text-[40vw] font-black tracking-tighter" style={{ fontFamily: "'Impact', sans-serif" }}>
@@ -130,105 +155,23 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ slug:
           </h1>
         </div>
 
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="relative z-10 flex flex-col items-center gap-8 text-center px-6"
-        >
+        <div className="relative z-10 flex flex-col items-center gap-8 px-6">
           <div className="flex flex-col gap-2">
             <span className="text-[#CCFF00] text-xs md:text-sm tracking-[0.5em] uppercase font-bold">Error / 404</span>
             <h1 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none" style={{ fontFamily: "'Impact', sans-serif" }}>
               Project <br />Not Found
             </h1>
           </div>
-          
-          <p className="text-zinc-500 text-sm md:text-lg max-w-md leading-relaxed">
-            The transmission was interrupted. This project either doesn't exist or has been moved to a restricted archive.
-          </p>
-
           <Link 
             href="/"
-            className="group relative mt-4 px-12 py-5 bg-[#CCFF00] text-black font-black text-sm uppercase tracking-[0.3em] rounded-sm overflow-hidden transition-all duration-300 hover:pr-16"
+            className="group relative mt-4 px-12 py-5 bg-[#CCFF00] text-black font-black text-sm uppercase tracking-[0.3em] rounded-sm transition-all duration-300 hover:pr-16"
           >
-            <span className="relative z-10">Back to Reality</span>
-            <span className="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 text-xl">&rarr;</span>
+            Back to Reality &rarr;
           </Link>
-        </motion.div>
-
-        {/* Decorative corner elements */}
-        <div className="absolute top-12 left-12 w-24 h-[1px] bg-white/10 hidden md:block" />
-        <div className="absolute top-12 left-12 h-24 w-[1px] bg-white/10 hidden md:block" />
-        <div className="absolute bottom-12 right-12 w-24 h-[1px] bg-white/10 hidden md:block" />
-        <div className="absolute bottom-12 right-12 h-24 w-[1px] bg-white/10 hidden md:block" />
+        </div>
       </div>
     );
   }
 
-  return (
-    <main className="relative w-full min-h-[100dvh] bg-[#050505] text-white selection:bg-[#CCFF00] selection:text-black">
-      
-      {/* Custom cursor & Floating WhatsApp */}
-      <CustomCursor />
-      <FloatingWhatsApp />
-
-      {/* Noise overlay for texture */}
-      <div className="fixed inset-0 pointer-events-none z-50 noise-overlay" />
-      
-      {/* Main Content Wrapper (scrolls over the sticky footer) */}
-      <div className="relative z-10 bg-[#050505] w-full pb-2 md:pb-0">
-        
-        {/* Dynamic Project Hero */}
-        <section className="relative w-full h-[80vh] flex items-end pb-24 px-6 md:px-24">
-           <div className="absolute inset-0 z-0 opacity-90">
-              <Image src={project.heroImage} alt={project.title} fill className="object-cover mix-blend-luminosity grayscale" priority sizes="100vw" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#050505] to-transparent" />
-           </div>
-           
-           <div className="relative z-10 flex flex-col gap-4 max-w-4xl">
-              <div className="flex items-center gap-4 text-[#CCFF00] font-mono text-xs tracking-[0.3em] uppercase">
-                 <span>{project.category}</span>
-                 <span>/</span>
-                 <span>{project.year}</span>
-              </div>
-              <h1 className="text-6xl md:text-9xl font-black uppercase tracking-tighter leading-[0.8]" style={{ fontFamily: "'Impact', sans-serif" }}>
-                {project.title}
-              </h1>
-              <p className="text-xl md:text-2xl text-zinc-300 font-light mt-4 max-w-2xl">
-                {project.summary}
-              </p>
-
-              {project.websiteUrl && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
-                  className="mt-4"
-                >
-                  <Link 
-                    href={project.websiteUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3 bg-[#CCFF00] text-black px-10 py-5 rounded-full font-black text-sm uppercase tracking-[0.2em] hover:bg-white hover:scale-105 transition-all duration-300 shadow-[0_0_30px_rgba(204,255,0,0.2)]"
-                  >
-                    Visit Live Site
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-                  </Link>
-                </motion.div>
-              )}
-           </div>
-        </section>
-
-        {/* BLOCK RENDERER */}
-        <div className="px-6 md:px-24 max-w-[100rem] mx-auto pb-16">
-          <BlockRenderer blocks={project.blocks} />
-        </div>
-      </div>
-
-      {/* Sticky Revealed Footer */}
-      <div className="sticky bottom-0 left-0 w-full h-[100dvh] z-0">
-        <ContactFooter />
-      </div>
-
-    </main>
-  );
+  return <ProjectDetailClient project={project} />;
 }

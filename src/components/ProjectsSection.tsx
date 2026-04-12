@@ -6,44 +6,14 @@ import Image from 'next/image';
 
 const projects = [
   {
-    id: "memoir",
-    year: "2025",
-    title: "MEMOIR",
-    category: "A journal on design culture",
-    description: "A personal journal exploring the intersections of music, architecture, and design — the frequencies that shape how we build and feel.",
-    technologies: ["ASTRO", "GSAP", "TYPESCRIPT", "TAILWIND"],
-    bgImage: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&q=60",
-    link: "#"
-  },
-  {
-    id: "dentos",
-    year: "2024",
-    title: "DENTOS",
-    category: "Dental ERP system",
-    description: "Modular practice management suite: digital odontogram, patient records, scheduling, billing, and staff time tracking — all in one unified interface.",
-    technologies: ["REACT", "NEXT.JS", "MONGODB", "NODE.JS", "TYPESCRIPT"],
-    bgImage: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&q=60",
-    link: "#"
-  },
-  {
-    id: "fashion",
-    year: "2024",
-    title: "FASHION",
-    category: "E-Commerce platform",
-    description: "The number one fashion platform in the region made with the best experts in the industry.",
-    technologies: ["NEXT.JS", "TAILWIND", "STRIPE", "PRISMA"],
-    bgImage: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800&q=60",
-    link: "#"
-  },
-  {
-    id: "gymfit",
-    year: "2023",
-    title: "GYMFIT",
-    category: "Health & Fitness App",
-    description: "Take care of your health with a virtual gym and stay fit with tracking features just in your hand.",
-    technologies: ["REACT NATIVE", "NODE.JS", "REDIS", "EXPRESS"],
-    bgImage: "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&q=60",
-    link: "#"
+    id: "khatwa",
+    year: "2026",
+    title: "KHATWA",
+    category: "OPERATIONAL ERP / CORPORATE WEBSITE",
+    description: "A complete digital transformation for an educational consultancy. I engineered a high-converting web presence paired with a custom role-based ERP to automate complex student workflows and scale their operations.",
+    technologies: ["NEXT.JS", "NODE.JS", "POSTGRESQL", "TAILWIND CSS"],
+    bgImage: "/khatwa-study.png",
+    link: "/projects/khatwa"
   }
 ];
 
@@ -60,32 +30,15 @@ export default function ProjectsSection() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Original horizontal scroll animation for everyone
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  });
-
-  // Apply horizontal transform based on total projects (-75% for 4 projects of 100vw each)
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-75%"]);
-
   return (
-    <section ref={containerRef} id="projects" className="relative h-[400dvh] w-full bg-[#050505] mt-16 md:mt-32">
-
-      {/* Sticky container locks to the screen while scrolling through the 400dvh container */}
-      <div className="sticky top-0 h-[100dvh] w-full overflow-hidden flex items-center bg-[#0a0a0a]">
-
-        {/* The horizontal scrolling track wrapper - Hardware accelerated */}
-        <motion.div
-          style={{ x }}
-          className="flex h-full w-[400vw] will-change-transform"
-        >
-
+    <section ref={containerRef} id="projects" className="relative h-screen w-full bg-[#050505] mt-16 md:mt-32">
+      {/* Container for the single featured project */}
+      <div className="h-full w-full overflow-hidden flex items-center bg-[#0a0a0a]">
+        <div className="flex h-full w-full">
           {projects.map((project, index) => (
             <ProjectCardDesktop key={project.id} project={project} index={index} />
           ))}
-
-        </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -129,16 +82,16 @@ function ProjectCardMobile({ project, index }: { project: typeof projects[0]; in
           alt={project.title}
           fill
           loading="lazy"
-          className="object-cover opacity-25 grayscale"
+          className="object-cover opacity-40 transition-opacity duration-700"
           sizes="100vw"
         />
       </a>
-      <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/90 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/85 to-transparent pointer-events-none" />
 
       {/* Top Metadata - Simplified */}
       <div className="absolute top-6 left-6 z-20">
         <span className="text-[#CCFF00] font-mono text-[10px] tracking-[0.2em] uppercase">
-          {`0${index + 1} / 04`}
+          {`0${index + 1} / 01`}
         </span>
       </div>
 
@@ -148,7 +101,7 @@ function ProjectCardMobile({ project, index }: { project: typeof projects[0]; in
         className="absolute top-[35%] sm:top-1/2 -translate-y-1/2 z-10 w-full text-center"
       >
         <h2
-          className="text-[18vw] leading-[0.85] text-[#E8E6E1] uppercase tracking-tighter opacity-90 select-none"
+          className="text-[18vw] leading-[0.85] text-[#E8E6E1] uppercase tracking-tighter opacity-90 select-none drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]"
           style={{ fontFamily: "'Impact', 'Arial Black', sans-serif" }}
         >
           {project.title}
@@ -160,7 +113,7 @@ function ProjectCardMobile({ project, index }: { project: typeof projects[0]; in
         <h3 className="text-lg font-medium text-white font-serif leading-tight">
           {project.category}
         </h3>
-        <p className="text-zinc-400 text-xs leading-relaxed line-clamp-2">
+        <p className="text-zinc-300 text-xs leading-relaxed line-clamp-2 drop-shadow-md">
           {project.description}
         </p>
         <div className="flex flex-wrap gap-1.5 mt-1">
@@ -178,6 +131,14 @@ function ProjectCardMobile({ project, index }: { project: typeof projects[0]; in
             </span>
           )}
         </div>
+
+        {/* New Mobile CTA Button */}
+        <a 
+          href={project.link}
+          className="mt-4 w-full bg-[#CCFF00] text-black text-[10px] font-bold tracking-[0.2em] uppercase py-4 rounded-xl flex items-center justify-center gap-2 active:scale-95 transition-transform"
+        >
+          VIEW CASE STUDY &rarr;
+        </a>
       </div>
     </motion.div>
   );
@@ -192,7 +153,7 @@ function ProjectCardDesktop({ project, index }: { project: typeof projects[0]; i
       {/* Background Image acts as a clickable link spanning the whole screen under the text */}
       <a href={project.link} className="absolute inset-0 z-0 block overflow-hidden min-h-[100dvh]">
         <motion.div
-          className="relative w-full h-full opacity-30 mix-blend-luminosity grayscale group-hover:opacity-40 transition-all duration-[1500ms] pointer-events-none"
+          className="relative w-full h-full opacity-40 group-hover:opacity-60 transition-all duration-[1500ms] pointer-events-none"
           whileHover={{ scale: 1.1 }}
         >
           <Image
@@ -206,7 +167,7 @@ function ProjectCardDesktop({ project, index }: { project: typeof projects[0]; i
           />
         </motion.div>
       </a>
-      <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/85 to-transparent pointer-events-none" />
 
       {/* Top Left Metadata */}
       <div className="absolute top-8 md:top-12 left-6 md:left-12 z-20 overflow-hidden">
@@ -214,16 +175,16 @@ function ProjectCardDesktop({ project, index }: { project: typeof projects[0]; i
           whileHover={{ x: 10 }}
           className="text-[#CCFF00] font-mono text-xs md:text-sm tracking-[0.2em] md:tracking-[0.3em] uppercase cursor-pointer"
         >
-          {`0${index + 1} / 04 / STUFF I BUILT / P. ${604 + index}`}
+          {`0${index + 1} / 01 / STUFF I BUILT / P. ${604 + index}`}
         </motion.div>
       </div>
 
       <a
         href={project.link}
-        className="absolute top-[40%] sm:top-1/2 -translate-y-1/2 z-10 w-full text-center hover:opacity-100 transition-opacity"
+        className="absolute top-[45%] md:top-[55%] -translate-y-1/2 z-10 w-full text-center hover:opacity-100 transition-opacity"
       >
         <h2
-          className="text-[30vw] md:text-[25vw] leading-[0.8] text-[#E8E6E1] group-hover:text-[#CCFF00] group-hover:scale-105 transition-all duration-700 uppercase tracking-tighter opacity-90 select-none mix-blend-plus-lighter drop-shadow-2xl"
+          className="text-[25vw] md:text-[20vw] leading-[0.8] text-[#E8E6E1] group-hover:text-[#CCFF00] transition-all duration-700 uppercase tracking-tighter opacity-90 select-none mix-blend-plus-lighter drop-shadow-2xl"
           style={{ fontFamily: "'Impact', 'Arial Black', sans-serif" }}
         >
           {project.title}
@@ -235,7 +196,7 @@ function ProjectCardDesktop({ project, index }: { project: typeof projects[0]; i
         <h3 className="text-xl sm:text-2xl md:text-4xl font-medium text-white font-serif tracking-wide drop-shadow-lg leading-tight">
           {project.category}
         </h3>
-        <p className="text-zinc-400 text-xs sm:text-sm md:text-lg leading-relaxed max-w-xl line-clamp-3 md:line-clamp-none">
+        <p className="text-zinc-300 text-xs sm:text-sm md:text-lg leading-relaxed max-w-xl line-clamp-3 md:line-clamp-none drop-shadow-lg">
           {project.description}
         </p>
         <div className="flex flex-wrap gap-2 md:gap-3 mt-2">
@@ -247,6 +208,17 @@ function ProjectCardDesktop({ project, index }: { project: typeof projects[0]; i
               {tech}
             </span>
           ))}
+        </div>
+        
+        {/* Prominent Desktop Button */}
+        <div className="mt-8 flex pointer-events-auto">
+          <a
+            href={project.link}
+            className="group/btn relative px-8 py-4 bg-[#CCFF00] text-black text-xs font-bold tracking-[0.3em] uppercase rounded-sm overflow-hidden flex items-center gap-4 hover:pr-12 transition-all duration-300"
+          >
+            <span>VIEW CASE STUDY</span>
+            <span className="text-xl">&rarr;</span>
+          </a>
         </div>
       </div>
 

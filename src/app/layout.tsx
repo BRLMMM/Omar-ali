@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/icon.svg', // Using your own branding logo for the preview
+        url: '/icon.png', // Using the PNG version for social previews (WhatsApp/FB/Twitter)
         width: 1200,
         height: 630,
         alt: 'Omar Ali | Digital Partner & Full-Stack Architect',
@@ -33,15 +33,15 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Omar Ali | Digital Partner & Full-Stack Architect',
     description: 'Digital Partner & Full-Stack Engineer. I architect custom systems, scalable e-commerce, and high-performance websites that drive real business growth.',
-    images: ['/icon.svg'],
+    images: ['/icon.png'],
   },
   icons: {
     icon: [
       { url: '/icon.svg', type: 'image/svg+xml' },
-      { url: '/icon.svg', rel: 'icon' },
+      { url: '/icon.png', type: 'image/png' },
     ],
     apple: [
-      { url: '/icon.svg' },
+      { url: '/icon.png' },
     ],
   },
 };

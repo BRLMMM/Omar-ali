@@ -11,7 +11,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://omali.ae'), // Set your production domain here
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
   title: 'Omar Ali | Digital Partner & Full-Stack Architect',
   description: 'Digital Partner & Full-Stack Engineer. I architect custom systems, scalable e-commerce, and high-performance websites that drive real business growth.',
   keywords: ['Full-Stack Developer', 'Systems Architect', 'Digital Partner', 'E-commerce Developer', 'Next.js', 'Custom ERP', 'Seyaq Agency', 'UI/UX Design', 'Web Development'],
@@ -36,8 +36,13 @@ export const metadata: Metadata = {
     images: ['/khatwa-study.png'],
   },
   icons: {
-    icon: '/icon.svg',
-    apple: '/icon.svg',
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/icon.svg', rel: 'icon' },
+    ],
+    apple: [
+      { url: '/icon.svg' },
+    ],
   },
 };
 

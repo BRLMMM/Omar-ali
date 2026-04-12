@@ -1,0 +1,15 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="32" height="32" rx="6" fill="#050505"/>
+  <text 
+    x="50%" 
+    y="54%" 
+    dominant-baseline="central" 
+    text-anchor="middle" 
+    fill="#CCFF00" 
+    font-family="'Space Grotesk', sans-serif" 
+    font-weight="900" 
+    font-size="22"
+  >
+    O
+  </text>
+</svg>

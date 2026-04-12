@@ -4,6 +4,7 @@ import { GoogleAnalytics } from '@next/third-parties/google';
 import Script from 'next/script';
 import './globals.css';
 import SmoothScroll from '@/components/SmoothScroll';
+import Navbar from '@/components/Navbar';
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -55,6 +56,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${spaceGrotesk.variable}`} suppressHydrationWarning>
       <body className={`${spaceGrotesk.className} bg-[#050505] text-white antialiased`} suppressHydrationWarning>
+        <Navbar />
         <SmoothScroll>{children}</SmoothScroll>
         <GoogleAnalytics gaId="G-N1NK0CWKFD" />
         
@@ -64,6 +66,7 @@ export default function RootLayout({
             (function(c,l,a,r,i,t,y){
                 c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
                 t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                t.setAttribute('crossorigin','anonymous');
                 y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
             })(window, document, "clarity", "script", "waasm5hf23");
           `}

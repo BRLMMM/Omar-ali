@@ -107,7 +107,9 @@ export default function ContactFooter() {
   };
 
   return (
-    <div id="contact" ref={containerRef} className="relative w-full h-auto overflow-hidden">
+    <>
+      <div id="contact" className="absolute h-0 w-0 -mt-10" />
+      <div ref={containerRef} className="relative w-full h-auto overflow-hidden">
       <footer className="sticky top-0 w-full bg-[#E8E6E1] text-black pt-24 pb-32 md:pt-40 px-6 md:px-12 xl:px-24 border-t-2 border-black min-h-screen flex flex-col justify-between">
         <motion.div 
           style={{ y: contentY }}
@@ -322,6 +324,7 @@ export default function ContactFooter() {
 
         </motion.div>
       </footer>
-    </div>
+      </div>
+    </>
   );
 }

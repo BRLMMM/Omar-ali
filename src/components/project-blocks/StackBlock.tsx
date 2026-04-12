@@ -46,7 +46,7 @@ const RadialGauge = ({ value, label, color = "#CCFF00", delay = 0 }: { value: nu
 
 export default function StackBlock({ data }: { data: DevelopmentStackBlock }) {
   return (
-    <section className="relative w-full py-20 md:py-32 border-t border-white/10 overflow-hidden">
+    <section id="development" className="relative w-full py-20 md:py-32 border-t border-white/10 overflow-hidden">
       
       <div className="relative z-10 flex flex-col gap-24">
         

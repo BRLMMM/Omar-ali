@@ -20,7 +20,7 @@ export default function DesignBlock({ data }: { data: StrategyDesignBlock }) {
   };
 
   return (
-    <section ref={containerRef} className="relative w-full py-16 md:py-32 border-t border-white/10 overflow-hidden">
+    <section id="design" ref={containerRef} className="relative w-full py-16 md:py-32 border-t border-white/10 overflow-hidden">
       <div className="flex flex-col gap-20">
         
         {/* Top Half: Strategy Text & Animated Concept */}

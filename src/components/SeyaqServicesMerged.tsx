@@ -30,7 +30,7 @@ export default function SeyaqServicesMerged() {
   const coloredBarHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <section ref={containerRef} className="relative md:h-[200dvh] w-full bg-[#050505] text-[#F5F5F0]">
+    <section id="services" ref={containerRef} className="relative md:h-[200dvh] w-full bg-[#050505] text-[#F5F5F0]">
       {/* Sticky container stays on screen on desktop. On mobile, it flows naturally. */}
       <div className="md:sticky md:top-0 md:h-[100dvh] w-full flex flex-col md:flex-row md:overflow-hidden">
         

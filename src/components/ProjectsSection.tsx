@@ -18,7 +18,12 @@ const projects = [
 ];
 
 export default function ProjectsSection() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const targetRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+  });
+
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-1%"]);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -31,7 +36,7 @@ export default function ProjectsSection() {
   }, []);
 
   return (
-    <section ref={containerRef} id="projects" className="relative h-screen w-full bg-[#050505] mt-16 md:mt-32">
+    <section ref={targetRef} id="projects" className="relative h-screen w-full bg-[#050505] mt-16 md:mt-32">
       {/* Container for the single featured project */}
       <div className="h-full w-full overflow-hidden flex items-center bg-[#0a0a0a]">
         <div className="flex h-full w-full">

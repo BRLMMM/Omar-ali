@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/khatwa-study.png', // Using the flagship project as the main preview image
+        url: '/icon.svg', // Using your own branding logo for the preview
         width: 1200,
         height: 630,
         alt: 'Omar Ali | Digital Partner & Full-Stack Architect',
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Omar Ali | Digital Partner & Full-Stack Architect',
     description: 'Digital Partner & Full-Stack Engineer. I architect custom systems, scalable e-commerce, and high-performance websites that drive real business growth.',
-    images: ['/khatwa-study.png'],
+    images: ['/icon.svg'],
   },
   icons: {
     icon: [

@@ -25,7 +25,7 @@ export default function ProblemBlock({ data }: { data: ProblemStatementBlock }) 
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-5xl md:text-7xl font-black text-white uppercase leading-none tracking-tighter"
+              className="text-5xl md:text-7xl font-black text-white uppercase leading-none tracking-[0.02em]"
               style={{ fontFamily: "'Impact', sans-serif" }}
             >
               {data.title}
@@ -84,7 +84,7 @@ export default function ProblemBlock({ data }: { data: ProblemStatementBlock }) 
             
             <div className="relative z-10">
               <span className="text-red-500 font-mono text-3xl md:text-5xl font-black uppercase tracking-tighter drop-shadow-lg">
-                LOSS TREND
+                {data.trendLabel || 'LOSS TREND'}
               </span>
               <div className="h-1 w-8 bg-red-500/50 mt-1" />
             </div>

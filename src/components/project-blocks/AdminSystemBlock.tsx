@@ -7,10 +7,18 @@ import { ManagementSystemBlock } from '@/types/project';
 // Simple helper to pick an SVG icon for Finance, Team, etc based on the string 'icon'
 const ModuleIcon = ({ type }: { type?: string }) => {
   switch(type) {
-    case 'finance':
-      return <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>;
+    case 'crm':
+      return <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>;
+    case 'workflows':
+      return <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>;
+    case 'sales':
+      return <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M13 8H7M17 12H7"/></svg>;
+    case 'scheduling':
+      return <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>;
+    case 'analytics':
+      return <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 3v18h18"/><path d="M18 17l-6-6-4 4-5-5"/></svg>;
     case 'team':
-      return <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>;
+      return <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>;
     default:
       return <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>;
   }
@@ -33,15 +41,15 @@ export default function AdminSystemBlock({ data }: { data: ManagementSystemBlock
               viewport={{ once: true }}
               className="flex items-center gap-3"
             >
-              <div className="w-2 h-2 rounded-full bg-[#10b981]" />
-              <span className="text-[#10b981] font-mono text-sm tracking-[0.3em] uppercase">COMMAND CENTER</span>
+              <div className="w-2 h-2 rounded-full bg-[#CCFF00]" />
+              <span className="text-[#CCFF00] font-mono text-sm tracking-[0.3em] uppercase">OPERATIONAL ERP</span>
             </motion.div>
             
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-4xl md:text-6xl font-medium text-white tracking-tight leading-tight font-serif"
+              className="text-4xl md:text-6xl font-medium text-white tracking-[0.02em] leading-tight font-serif"
             >
               {data.title}
             </motion.h2>
@@ -51,7 +59,7 @@ export default function AdminSystemBlock({ data }: { data: ManagementSystemBlock
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-zinc-400 text-xl font-light leading-relaxed mt-2"
+              className="text-zinc-400 text-xl font-light leading-relaxed mt-2 pl-6 border-l-2 border-[#CCFF00]/20"
             >
               {data.description}
             </motion.p>
@@ -123,24 +131,29 @@ export default function AdminSystemBlock({ data }: { data: ManagementSystemBlock
           <div className="flex flex-col gap-8">
             <h3 className="text-white font-mono text-xl uppercase tracking-widest border-b border-white/10 pb-4">// CORE MODULES</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {data.modules.map((mod, i) => (
-                <motion.div 
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="bg-zinc-900/50 border border-white/5 rounded-3xl p-8 hover:bg-[#10b981]/5 hover:border-[#10b981]/30 transition-all duration-300 flex flex-col gap-6"
-                >
-                  <div className="w-12 h-12 rounded-xl bg-black border border-white/10 flex items-center justify-center text-[#10b981]">
-                    <ModuleIcon type={mod.icon} />
-                  </div>
-                  <div>
-                    <h4 className="text-white font-bold text-xl mb-3">{mod.name}</h4>
-                    <p className="text-zinc-400 font-light leading-relaxed text-sm">{mod.description}</p>
-                  </div>
-                </motion.div>
-              ))}
+              {data.modules.map((mod, i) => {
+                // If we have 6 modules, make the last 2 expand to col-span-2 to fill the grid
+                const isLastTwoOfSix = data.modules.length === 6 && i >= 4;
+                
+                return (
+                  <motion.div 
+                    key={i}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                    className={`bg-zinc-900/50 border border-white/5 rounded-3xl p-8 hover:bg-[#CCFF00]/5 hover:border-[#CCFF00]/30 transition-all duration-300 flex flex-col gap-6 ${isLastTwoOfSix ? 'lg:col-span-2' : ''}`}
+                  >
+                    <div className="w-12 h-12 rounded-xl bg-black border border-white/10 flex items-center justify-center text-[#CCFF00]">
+                      <ModuleIcon type={mod.icon} />
+                    </div>
+                    <div>
+                      <h4 className="text-white font-bold text-xl mb-3">{mod.name}</h4>
+                      <p className="text-zinc-400 font-light leading-relaxed text-sm">{mod.description}</p>
+                    </div>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         )}
@@ -167,7 +180,9 @@ export default function AdminSystemBlock({ data }: { data: ManagementSystemBlock
                       className="object-cover transition-transform duration-1000 group-hover:scale-105" 
                       loading="lazy"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#10b981]/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                    <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#050505]/80 to-transparent pointer-events-none z-10" />
+                    <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#050505]/80 to-transparent pointer-events-none z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-tr from-[#CCFF00]/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                   </div>
                   <div className="px-4">
                      <span className="text-zinc-500 font-mono text-xs tracking-widest uppercase mb-1 block">Preview {idx + 1}</span>

@@ -3,9 +3,11 @@
 import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 import { StrategyDesignBlock } from '@/types/project';
 
 export default function DesignBlock({ data }: { data: StrategyDesignBlock }) {
+  console.log("DesignBlock Data:", data);
   const containerRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -41,7 +43,7 @@ export default function DesignBlock({ data }: { data: StrategyDesignBlock }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
-                className="text-4xl md:text-6xl font-medium text-white font-serif tracking-tight"
+                className="text-4xl md:text-6xl font-medium text-white font-serif tracking-[0.02em]"
               >
                 {data.title}
               </motion.h2>
@@ -68,6 +70,17 @@ export default function DesignBlock({ data }: { data: StrategyDesignBlock }) {
                <p className="text-zinc-300 text-lg leading-relaxed">
                   {data.solutionText}
                </p>
+                {data.websiteUrl && (
+                  <Link 
+                    href={data.websiteUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-[#CCFF00] text-black px-8 py-4 rounded-full font-black text-xs uppercase tracking-widest hover:bg-white hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(204,255,0,0.15)] mt-6 w-fit inline-flex items-center gap-2"
+                  >
+                    Visit Live Website
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                  </Link>
+                )}
             </motion.div>
           </div>
 

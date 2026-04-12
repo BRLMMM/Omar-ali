@@ -118,6 +118,18 @@ export default function HeroSection() {
           ))}
         </motion.div>
 
+        {/* Sub-heading - Integrated within the name flow */}
+        <motion.div 
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1, duration: 1 }}
+          className="mt-12 md:mt-24 flex flex-col items-center gap-4 px-4 text-center"
+        >
+          <div className="h-[1px] w-6 md:w-12 bg-[#CCFF00]/50 mb-2" />
+          <p className="text-[10px] sm:text-xs md:text-sm font-mono tracking-[0.3em] sm:tracking-[0.5em] text-[#E8E6E1]/95 uppercase max-w-[80vw]">
+            Tech Solutions. Full-Stack Engineer. Digital Partner
+          </p>
+        </motion.div>
       </div>
     </section>
   );

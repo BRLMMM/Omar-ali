@@ -15,6 +15,7 @@ export interface ProblemStatementBlock extends BaseBlock {
   title: string;
   problem: string;
   impact?: string;
+  trendLabel?: string;
 }
 
 export interface StrategyDesignBlock extends BaseBlock {
@@ -22,6 +23,7 @@ export interface StrategyDesignBlock extends BaseBlock {
   title: string;
   description: string;
   solutionText: string;
+  websiteUrl?: string;
   assets: { src: string; alt: string; caption?: string }[];
 }
 
@@ -79,5 +81,6 @@ export interface ProjectData {
   client?: string;
   year: string;
   summary: string;
+  websiteUrl?: string;
   blocks: ProjectBlockContent[];
 }

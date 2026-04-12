@@ -3,13 +3,13 @@
 import { motion } from 'framer-motion';
 import { DevelopmentStackBlock } from '@/types/project';
 import { FaReact, FaNodeJs, FaPython, FaAws, FaDocker } from 'react-icons/fa';
-import { SiNextdotjs, SiTypescript, SiTailwindcss, SiPrisma, SiPostgresql, SiMongodb } from 'react-icons/si';
+import { SiNextdotjs, SiTypescript, SiTailwindcss, SiPrisma, SiPostgresql, SiMongodb, SiNginx } from 'react-icons/si';
 
 // Helper to map string to actual React Icon
 const getIcon = (name: string) => {
   const icons: { [key: string]: any } = {
     FaReact, FaNodeJs, FaPython, FaAws, FaDocker,
-    SiNextdotjs, SiTypescript, SiTailwindcss, SiPrisma, SiPostgresql, SiMongodb
+    SiNextdotjs, SiTypescript, SiTailwindcss, SiPrisma, SiPostgresql, SiMongodb, SiNginx
   };
   return icons[name] || FaReact; 
 };
@@ -70,7 +70,7 @@ export default function StackBlock({ data }: { data: DevelopmentStackBlock }) {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-5xl md:text-7xl font-black text-white uppercase tracking-tighter"
+              className="text-5xl md:text-7xl font-black text-white uppercase tracking-[0.02em]"
               style={{ fontFamily: "'Impact', sans-serif" }}
             >
               {data.title}

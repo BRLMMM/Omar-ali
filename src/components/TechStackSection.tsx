@@ -2,37 +2,38 @@
 
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { FaHtml5, FaCss3Alt, FaWordpress, FaLaravel, FaReact, FaPython, FaAngular, FaNodeJs, FaMicrosoft } from 'react-icons/fa';
-import { SiMysql, SiVuedotjs, SiShopify } from 'react-icons/si';
+import { FaHtml5, FaCss3Alt, FaWordpress, FaPython, FaNodeJs, FaJs, FaDatabase } from 'react-icons/fa';
+import { SiMysql, SiShopify, SiNextdotjs, SiTailwindcss, SiBootstrap, SiPostgresql, SiPrisma, SiCplusplus, SiJavascript } from 'react-icons/si';
 import { FiArrowUpRight, FiArrowDownRight } from 'react-icons/fi';
 
 const techColumns = [
   {
-    title: "SINGLE",
+    title: "E-COMMERCE",
     items: [
-      { name: "HTML", icon: FaHtml5 },
-      { name: "CSS", icon: FaCss3Alt },
-      { name: "WordPress", icon: FaWordpress },
-      { name: "Shopify", icon: SiShopify }
+      { name: "Shopify", icon: SiShopify },
+      { name: "Liquid (Shopify)", icon: SiShopify },
+      { name: "WordPress", icon: FaWordpress }
     ]
   },
   {
-    title: "MIDDLE",
+    title: "FRONTEND",
     items: [
-      { name: "Laravel", icon: FaLaravel },
-      { name: "MySQL", icon: SiMysql },
-      { name: "Vue", icon: SiVuedotjs },
-      { name: "PHP", icon: FaLaravel } // using laravel icon as a proxy, or text fallback
+      { name: "Next.js", icon: SiNextdotjs },
+      { name: "JavaScript (ES6+)", icon: SiJavascript },
+      { name: "Tailwind CSS", icon: SiTailwindcss },
+      { name: "HTML5 / CSS3", icon: FaHtml5 },
+      { name: "Bootstrap", icon: SiBootstrap }
     ]
   },
   {
-    title: "ENTERPRISE",
+    title: "BACKEND",
     items: [
-      { name: "React.js", icon: FaReact },
-      { name: "Azure", icon: FaMicrosoft },
+      { name: "Node.js", icon: FaNodeJs },
+      { name: "PostgreSQL", icon: SiPostgresql },
+      { name: "Prisma ORM", icon: SiPrisma },
+      { name: "SQL", icon: FaDatabase },
       { name: "Python", icon: FaPython },
-      { name: "Angular", icon: FaAngular },
-      { name: "Node.js", icon: FaNodeJs }
+      { name: "C++", icon: SiCplusplus }
     ]
   }
 ];
@@ -57,7 +58,7 @@ export default function TechStackSection() {
           className="text-5xl md:text-6xl lg:text-7xl tracking-tighter font-black text-white uppercase leading-[0.85]"
           style={{ fontFamily: "'Impact', 'Arial Black', sans-serif" }}
         >
-          OUR<br />TECHNOLOGIES
+          MY<br />TECHNOLOGIES
         </motion.h2>
 
         <motion.div
@@ -68,14 +69,14 @@ export default function TechStackSection() {
            className="mt-16 lg:mt-auto flex flex-col gap-8 items-start"
         >
           <p className="text-zinc-400 text-lg md:text-xl max-w-sm leading-relaxed">
-            A personalized approach to every project — for the best results.
+            Frameworks are just tools. I don&apos;t force a specific stack; I deploy the exact technologies your project demands for maximum performance, security, and scalability.
           </p>
           
           <motion.a 
-            href="#projects"
+            href="#contact"
             className="group flex items-center gap-4 bg-[#CCFF00] text-black px-6 md:px-8 py-3 md:py-4 rounded-full border-2 border-[#CCFF00] shadow-[5px_5px_0_0_#FFFFFF] hover:shadow-[0px_0px_0_0_#FFFFFF] hover:translate-x-[5px] hover:translate-y-[5px] transition-all duration-200 font-mono font-black text-xs md:text-sm tracking-[0.2em] uppercase"
           >
-            <span>MORE TECHNOLOGIES</span>
+            <span>LET&apos;S ARCHITECT YOURS</span>
             <div className="w-[2px] h-4 bg-black opacity-50" />
             <motion.span 
               className="flex items-center justify-center text-xl group-hover:rotate-45 transition-transform duration-300"

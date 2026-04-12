@@ -6,7 +6,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 const QuestionBlock = ({ num, title, children }: any) => (
   <div className="flex flex-col md:flex-row gap-6 md:gap-16 border-b border-black/10 py-12 md:py-20 transition-colors hover:border-black/30">
     <div className="w-full md:w-1/3 flex flex-col gap-2">
-      <span className="text-black/40 font-mono text-sm tracking-widest uppercase">0{num} //</span>
+      <span className="text-black/70 font-mono text-sm tracking-widest uppercase">0{num} //</span>
       <h3 className="text-2xl md:text-3xl lg:text-4xl font-normal tracking-tight text-black" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
         {title}
       </h3>
@@ -19,6 +19,16 @@ const QuestionBlock = ({ num, title, children }: any) => (
 
 export default function ContactFooter() {
   const currentYear = new Date().getFullYear();
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Parallax effect for the footer content as it's revealed
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end end"]
+  });
+
+  const contentY = useTransform(scrollYProgress, [0, 1], [150, 0]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 0.5, 1]);
 
   // Environment Variables for Socials
   const instagramUrl = process.env.NEXT_PUBLIC_INSTAGRAM_URL || "#";
@@ -44,10 +54,10 @@ export default function ContactFooter() {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
-  const services = ['System / Dashboard', 'Modern Website', 'UI/UX Design', 'Maintenance'];
-  const timelines = ['As soon as possible', 'Within 1-2 months', 'No strict deadline'];
-  const origins = ['Idea / Just starting out', 'Already launched', 'Scaling / Expanding'];
-  const sources = ['LinkedIn', 'Twitter (X)', 'Google Search', 'Friend / Referral'];
+  const services = ['Custom ERP / System', 'E-Commerce / Corporate Site', 'UI/UX Design', 'Tech Consultation / Fractional CTO'];
+  const timelines = ['ASAP (Urgent)', '1-3 Months', 'Flexible Timeline'];
+  const origins = ['Early Stage / Just Starting', 'Established & Operating', 'Ready to Scale / Expanding'];
+  const sources = ['TikTok', 'Instagram', 'Referral', 'Google Search', 'LinkedIn'];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -97,13 +107,16 @@ export default function ContactFooter() {
   };
 
   return (
-    <div className="relative w-full h-auto overflow-hidden">
-      <footer className="sticky top-0 w-full bg-[#E8E6E1] text-black pt-24 pb-32 md:pt-40 px-6 md:px-12 xl:px-24 border-t-2 border-black">
-        <div className="flex flex-col">
+    <div id="contact" ref={containerRef} className="relative w-full h-auto overflow-hidden">
+      <footer className="sticky top-0 w-full bg-[#E8E6E1] text-black pt-24 pb-32 md:pt-40 px-6 md:px-12 xl:px-24 border-t-2 border-black min-h-screen flex flex-col justify-between">
+        <motion.div 
+          style={{ y: contentY }}
+          className="flex flex-col opacity-100"
+        >
 
       {/* Massive Title */}
       <h2 
-        className="text-[12vw] sm:text-[15vw] leading-[0.8] font-normal tracking-tighter mb-16 md:mb-32 opacity-90 uppercase"
+        className="text-[12vw] sm:text-[15vw] leading-[0.8] font-normal tracking-tighter mb-16 md:mb-32 opacity-100 text-black uppercase"
         style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", letterSpacing: '-0.02em' }}
       >
         START A PROJECT.
@@ -142,20 +155,20 @@ export default function ContactFooter() {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                placeholder="John Doe *"
-                className="w-full bg-transparent text-2xl md:text-4xl lg:text-5xl font-light placeholder-black/20 outline-none pb-4 focus:pb-2 transition-all"
+                placeholder="John Doe, CEO *"
+                className="w-full bg-transparent text-2xl md:text-4xl lg:text-5xl font-light placeholder-black/50 outline-none pb-4 focus:pb-2 transition-all"
                 required
               />
             </QuestionBlock>
 
-            <QuestionBlock num="2" title="Which company do you represent?">
+            <QuestionBlock num="2" title="What's the name of your company?">
               <input
                 type="text"
                 name="company"
                 value={formData.company}
                 onChange={handleChange}
-                placeholder="Seyaq Studio"
-                className="w-full bg-transparent text-2xl md:text-4xl lg:text-5xl font-light placeholder-black/20 outline-none pb-4 focus:pb-2 transition-all"
+                placeholder="e.g. Acme Corp"
+                className="w-full bg-transparent text-2xl md:text-4xl lg:text-5xl font-light placeholder-black/50 outline-none pb-4 focus:pb-2 transition-all"
               />
             </QuestionBlock>
 
@@ -166,7 +179,7 @@ export default function ContactFooter() {
                     key={srv}
                     type="button"
                     onClick={() => handleSelection(srv)}
-                    className={`px-6 py-4 rounded-full text-sm md:text-lg tracking-wide transition-all duration-300 border border-black/20 ${formData.serviceType.includes(srv) ? 'bg-[#CCFF00] border-[#CCFF00] font-medium shadow-sm' : 'hover:border-black/60 bg-transparent text-black/70'}`}
+                    className={`px-6 py-4 rounded-full text-sm md:text-lg tracking-wide transition-all duration-300 border border-black/20 ${formData.serviceType.includes(srv) ? 'bg-[#CCFF00] border-[#CCFF00] font-medium shadow-sm' : 'hover:border-black/60 bg-transparent text-black'}`}
                   >
                     {srv}
                   </button>
@@ -181,7 +194,7 @@ export default function ContactFooter() {
                     key={org}
                     type="button"
                     onClick={() => setFormData(prev => ({ ...prev, projectOrigin: org }))}
-                    className={`px-6 py-4 rounded-full text-sm md:text-lg tracking-wide transition-all duration-300 border border-black/20 ${formData.projectOrigin === org ? 'bg-[#CCFF00] border-[#CCFF00] font-medium shadow-sm' : 'hover:border-black/60 bg-transparent text-black/70'}`}
+                    className={`px-6 py-4 rounded-full text-sm md:text-lg tracking-wide transition-all duration-300 border border-black/20 ${formData.projectOrigin === org ? 'bg-[#CCFF00] border-[#CCFF00] font-medium shadow-sm' : 'hover:border-black/60 bg-transparent text-black'}`}
                   >
                     {org}
                   </button>
@@ -196,7 +209,7 @@ export default function ContactFooter() {
                     key={tml}
                     type="button"
                     onClick={() => setFormData(prev => ({ ...prev, timeline: tml }))}
-                    className={`px-6 py-4 rounded-full text-sm md:text-lg tracking-wide transition-all duration-300 border border-black/20 ${formData.timeline === tml ? 'bg-[#CCFF00] border-[#CCFF00] font-medium shadow-sm' : 'hover:border-black/60 bg-transparent text-black/70'}`}
+                    className={`px-6 py-4 rounded-full text-sm md:text-lg tracking-wide transition-all duration-300 border border-black/20 ${formData.timeline === tml ? 'bg-[#CCFF00] border-[#CCFF00] font-medium shadow-sm' : 'hover:border-black/60 bg-transparent text-black'}`}
                   >
                     {tml}
                   </button>
@@ -204,18 +217,18 @@ export default function ContactFooter() {
               </div>
             </QuestionBlock>
 
-            <QuestionBlock num="6" title="Any websites you love? (Inspiration)">
+            <QuestionBlock num="6" title="Any references or inspiration? (Links)">
               <input
                 type="text"
                 name="inspiration"
                 value={formData.inspiration}
                 onChange={handleChange}
-                placeholder="Drop some links here..."
-                className="w-full bg-transparent text-2xl md:text-4xl lg:text-5xl font-light placeholder-black/20 outline-none pb-4 focus:pb-2 transition-all"
+                placeholder="Drop competitor sites, favorite designs, or system examples here..."
+                className="w-full bg-transparent text-2xl md:text-4xl lg:text-5xl font-light placeholder-black/50 outline-none pb-4 focus:pb-2 transition-all"
               />
             </QuestionBlock>
 
-            <QuestionBlock num="7" title="How did you hear about Seyaq?">
+            <QuestionBlock num="7" title="How did you find me?">
               <div className="flex flex-wrap gap-4">
                 {sources.map(src => (
                   <button
@@ -235,8 +248,8 @@ export default function ContactFooter() {
                 name="details"
                 value={formData.details}
                 onChange={handleChange}
-                placeholder="Goals, target audience, extra notes..."
-                className="w-full bg-transparent text-xl md:text-3xl font-light placeholder-black/20 outline-none pb-4 focus:pb-2 transition-all resize-none min-h-[150px]"
+                placeholder="Describe your main bottleneck, target audience, and what you aim to achieve..."
+                className="w-full bg-transparent text-xl md:text-3xl font-light placeholder-black/50 outline-none pb-4 focus:pb-2 transition-all resize-none min-h-[150px]"
               />
             </QuestionBlock>
 
@@ -256,7 +269,7 @@ export default function ContactFooter() {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  placeholder="+20 100 000 0000"
+                  placeholder="WhatsApp Number"
                   className="w-full bg-transparent text-xl md:text-3xl font-light placeholder-black/20 outline-none pb-4 focus:pb-2 transition-all"
                 />
               </div>
@@ -273,7 +286,7 @@ export default function ContactFooter() {
                   disabled={isSubmitting}
                   className="w-full md:w-auto flex items-center justify-between gap-8 border-2 border-black bg-black text-[#CCFF00] px-12 py-6 md:py-8 rounded-full font-mono text-lg md:text-2xl font-black uppercase tracking-[0.2em] shadow-[10px_10px_0_0_#CCFF00] hover:shadow-[0px_0px_0_0_#CCFF00] hover:translate-x-[10px] hover:translate-y-[10px] transition-all duration-300 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed group"
                 >
-                  <span className="mt-1">{isSubmitting ? 'SENDING...' : 'SEND INQUIRY'}</span>
+                  <span className="mt-1">{isSubmitting ? 'SENDING...' : 'REQUEST A PROPOSAL'}</span>
                   <span className="inline-block transition-transform duration-500 group-hover:translate-x-4 border border-[#CCFF00]/50 rounded-full w-12 h-12 flex items-center justify-center text-3xl pb-2">
                     →
                   </span>
@@ -286,20 +299,29 @@ export default function ContactFooter() {
       </div>
 
       {/* Details Row - Footer */}
-      <div className="flex flex-col lg:flex-row justify-between items-center text-xs md:text-sm font-mono gap-6 pt-12 md:pt-20 border-t-2 border-black/10 z-20 mt-12 md:mt-32">
-        <p className="text-black/60 font-bold tracking-widest">
-          © {currentYear} ALL RIGHTS RESERVED FOR OMAR ALI.
-        </p>
-        
-        <div className="flex flex-wrap justify-center gap-6 md:gap-12 uppercase font-black tracking-widest text-black/80">
-          <a href={instagramUrl} target="_blank" rel="noopener noreferrer" className="hover:text-[#CCFF00] hover:bg-black px-3 py-2 rounded-sm transition-all duration-300">Instagram</a>
-          <a href={tiktokUrl} target="_blank" rel="noopener noreferrer" className="hover:text-[#CCFF00] hover:bg-black px-3 py-2 rounded-sm transition-all duration-300">TikTok</a>
-          <a href={facebookUrl} target="_blank" rel="noopener noreferrer" className="hover:text-[#CCFF00] hover:bg-black px-3 py-2 rounded-sm transition-all duration-300">Facebook</a>
+      <div className="flex flex-col gap-12 pt-12 md:pt-20 border-t-2 border-black/10 z-20 mt-12 md:mt-32">
+        <div className="flex flex-col lg:flex-row justify-between items-center text-xs md:text-sm font-mono gap-6">
+          <p className="text-black/60 font-bold tracking-widest">
+            © {currentYear} ALL RIGHTS RESERVED FOR OMAR ALI.
+          </p>
+          
+          <div className="flex flex-wrap justify-center gap-6 md:gap-12 uppercase font-black tracking-widest text-black/80">
+            <a href={instagramUrl} target="_blank" rel="noopener noreferrer" className="hover:text-[#CCFF00] hover:bg-black px-3 py-2 rounded-sm transition-all duration-300">Instagram</a>
+            <a href={tiktokUrl} target="_blank" rel="noopener noreferrer" className="hover:text-[#CCFF00] hover:bg-black px-3 py-2 rounded-sm transition-all duration-300">TikTok</a>
+            <a href={facebookUrl} target="_blank" rel="noopener noreferrer" className="hover:text-[#CCFF00] hover:bg-black px-3 py-2 rounded-sm transition-all duration-300">Facebook</a>
+          </div>
+        </div>
+
+        {/* Signature Branding */}
+        <div className="flex justify-center -mb-8 opacity-80">
+          <p className="font-mono text-[9px] md:text-[10px] tracking-[0.6em] uppercase text-black">
+            Crafted with focus by Omar
+          </p>
         </div>
       </div>
 
-      </div>
-    </footer>
-  </div>
+        </motion.div>
+      </footer>
+    </div>
   );
 }

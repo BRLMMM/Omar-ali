@@ -4,17 +4,17 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 const leftData = [
-  { label: 'FRONT', value: 'React • Next.js • React Native' },
-  { label: 'BACK', value: 'Node.js • Express • Python' },
-  { label: 'AI', value: 'TensorFlow • NLP • Vision' },
-  { label: 'DATA', value: 'MongoDB • PostgreSQL • Redis' },
+  { label: 'TECH', value: 'Tech Solutions • System Architecture • Web Apps' },
+  { label: 'GROWTH', value: 'Business Development • Scaling Strategies' },
+  { label: 'MARKET', value: 'Digital Marketing • Branding • Campaigns' },
+  { label: 'MEDIA', value: 'Post-Production • Video Editing • Visual Creation' },
 ];
 
 const rightData = [
-  { label: 'DESIGN', value: 'UI/UX • Branding • Prototypes' },
-  { label: 'WEB', value: 'Custom Apps • Landing Pages' },
-  { label: 'MOBILE', value: 'iOS • Android • Cross-Platform' },
-  { label: 'CONSULT', value: 'Tech Strategy • Architecture' },
+  { label: 'SYSTEMS', value: 'Full-Stack Engineering • Custom ERPs • Node & Next.js' },
+  { label: 'E-COMM', value: 'Shopify • WordPress • Conversion Rate Optimization' },
+  { label: 'UI/UX', value: 'Frictionless User Journeys • Modern Brutalist Design' },
+  { label: 'CONSULT', value: 'Fractional CTO • VPS Server Management • Tech Strategy' },
 ];
 
 export default function SeyaqServicesMerged() {
@@ -50,17 +50,17 @@ export default function SeyaqServicesMerged() {
           </motion.div>
         </div>
 
-        {/* LEFT PANEL: WHAT SEYAQ BUILDS */}
+        {/* LEFT PANEL: THE AGENCY FORCE */}
         <div className="w-full md:w-1/2 h-full flex flex-col justify-between py-16 md:py-32 px-10 md:pl-24 md:pr-16 z-10">
           <div className="mb-12 md:mb-20">
             <span className="text-[#CCFF00] font-mono text-[10px] sm:text-xs tracking-[0.2em] uppercase mb-4 block">
               // SEYAQ CAPABILITIES
             </span>
             <h2 className="text-5xl sm:text-6xl md:text-8xl font-black uppercase leading-[0.85] tracking-normal" style={{ fontFamily: "'Impact', 'Arial Black', sans-serif" }}>
-              WHAT WE<br />BUILD
+              THE AGENCY<br />FORCE
             </h2>
             <p className="mt-8 text-zinc-400 text-sm md:text-base max-w-sm leading-relaxed font-light">
-              SEYAQ is a forward-thinking software agency focused on delivering high-performance, scalable web and mobile applications tailored for ambitious startups and enterprises. We transform complex ideas into flawless digital realities.
+              As the Co-Founder & CTO of SEYAQ Agency, I lead a full-service digital powerhouse. We don&apos;t just build software; we engineer complete market dominance—combining robust tech solutions with aggressive business development and marketing strategies to scale your brand.
             </p>
           </div>
 
@@ -86,17 +86,17 @@ export default function SeyaqServicesMerged() {
           </div>
         </div>
 
-        {/* RIGHT PANEL: WHAT MOVES ME / SERVICES */}
+        {/* RIGHT PANEL: YOUR DIGITAL PARTNER */}
         <div className="w-full md:w-1/2 h-full flex flex-col justify-between py-16 md:py-32 px-10 md:pr-24 md:pl-16 z-10 border-t md:border-t-0 border-zinc-900">
           <div className="mb-12 md:mb-20">
             <span className="text-[#CCFF00] font-mono text-[10px] sm:text-xs tracking-[0.2em] uppercase mb-4 block">
               // MY SERVICES
             </span>
             <h2 className="text-5xl sm:text-6xl md:text-8xl font-black uppercase leading-[0.85] tracking-normal" style={{ fontFamily: "'Impact', 'Arial Black', sans-serif" }}>
-              HOW I<br />HELP YOU
+              YOUR DIGITAL<br />PARTNER
             </h2>
             <p className="mt-8 text-zinc-400 text-sm md:text-base max-w-sm leading-relaxed font-light">
-              I bridge the gap between complex engineering and beautiful design, offering fractional CTO services, complete system architecture, and cutting-edge frontend development to elevate your brand&apos;s digital presence.
+              I bridge the gap between business objectives and technical execution. Whether you need a high-converting e-commerce storefront, a custom operational ERP, or fractional CTO guidance, I build the exact digital engine your business needs to operate flawlessly.
             </p>
           </div>
 

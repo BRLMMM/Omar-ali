@@ -99,6 +99,12 @@ const MOCK_DB: Record<string, ProjectData> = {
           { name: 'NGINX Reverse Proxy', description: 'Configured as an impenetrable reverse proxy to efficiently route incoming traffic, enforce strict SSL encryption, and shield the backend from malicious requests.' },
           { name: 'PM2 Process Manager', description: 'The heartbeat of the Node.js backend. Configured with automated zero-downtime restarts and advanced log management to guarantee the system stays alive indefinitely.' },
           { name: 'PostgreSQL & Data Security', description: 'The core relational database is strictly isolated. Engineered with automated backup protocols to guarantee absolutely zero data loss for sensitive student records and operational data.' }
+        ],
+        metrics: [
+          { label: 'Uptime', value: '99.99%' },
+          { label: 'Latency', value: '<40ms' },
+          { label: 'Backups', value: 'Daily' },
+          { label: 'Security', value: 'SSL/WAF' }
         ]
       }
     ]

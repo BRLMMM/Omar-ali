@@ -14,7 +14,7 @@ const FloatingWhatsApp = dynamic(() => import('@/components/FloatingWhatsApp'));
 
 export default function Home() {
   return (
-    <main className="relative w-full min-h-[100dvh] bg-[#050505]">
+    <main className="relative w-full min-h-[100dvh] bg-[#050505]" suppressHydrationWarning>
       {/* Custom cursor & Floating WhatsApp */}
       <CustomCursor />
       <FloatingWhatsApp />
@@ -29,6 +29,8 @@ export default function Home() {
         <TechStackSection />
         <SeyaqServicesMerged />
         <ProjectsSection />
+        {/* Contact anchor - placed here so scrollIntoView works with the sticky reveal footer */}
+        <div id="contact" className="h-0 w-0 overflow-hidden" />
       </div>
 
       {/* 

@@ -72,18 +72,20 @@ export default function TechStackSection() {
             Frameworks are just tools. I don&apos;t force a specific stack; I deploy the exact technologies your project demands for maximum performance, security, and scalability.
           </p>
           
-          <motion.a 
+          <a 
             href="#contact"
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+            }}
             className="group flex items-center gap-4 bg-[#CCFF00] text-black px-6 md:px-8 py-3 md:py-4 rounded-full border-2 border-[#CCFF00] shadow-[5px_5px_0_0_#FFFFFF] hover:shadow-[0px_0px_0_0_#FFFFFF] hover:translate-x-[5px] hover:translate-y-[5px] transition-all duration-200 font-mono font-black text-xs md:text-sm tracking-[0.2em] uppercase"
           >
             <span>LET&apos;S ARCHITECT YOURS</span>
             <div className="w-[2px] h-4 bg-black opacity-50" />
-            <motion.span 
-              className="flex items-center justify-center text-xl group-hover:rotate-45 transition-transform duration-300"
-            >
+            <span className="flex items-center justify-center text-xl group-hover:rotate-45 transition-transform duration-300">
               <FiArrowUpRight />
-            </motion.span>
-          </motion.a>
+            </span>
+          </a>
         </motion.div>
       </div>
 
